@@ -52,7 +52,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <div>
               <h4 className="font-bold text-gray-900 mb-2">Contacto</h4>
               <p className="text-gray-500 mb-1">Email: safety@caribecargo.net</p>
-              <p className="text-gray-500">Tel: +1 (placeholder)</p>
+              <p className="text-gray-500">Tel: (809)549-2720 ext.726</p>
             </div>
             <div>
               <h4 className="font-bold text-gray-900 mb-2">Ubicación</h4>
@@ -61,7 +61,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </div>
           </div>
           <div className="border-t border-gray-200 pt-6 text-center text-xs text-gray-400">
-            <p>© Caribe Cargo · Uso interno</p>
+            <p>© Caribe Cargo S.R.L. · Uso interno</p>
             <p className="mt-1">Portal de Reportes de Seguridad - Acceso Restringido</p>
           </div>
         </footer>
