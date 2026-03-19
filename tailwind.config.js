@@ -1,12 +1,15 @@
-'module.exports = {
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+  ],
   theme: {
     extend: {
       colors: {
-        customBlue: '#1DA1F2',
-        customOrange: '#FF8C00',
-        customGreen: '#17BF63',
-        customRed: '#E0245E',
-      },
+        brandBlue: '#003B73', // Azul del botón y logo
+      }
     },
   },
-};'
+  plugins: [],
+};
