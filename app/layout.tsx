@@ -1,28 +1,44 @@
 import './globals.css';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="es">
-      <body className="min-h-screen flex flex-col font-sans text-gray-800">
+      <body className="min-h-screen flex flex-col antialiased bg-white">
         
-        {/* NAVEGACIÓN (HEADER) */}
-        <header className="border-b border-gray-200 py-4">
-          <div className="max-w-6xl mx-auto px-4 flex justify-between items-center">
-            {/* Reemplaza src con "/logo.png" cuando subas tu logo */}
-            <div className="flex items-center gap-2">
-              <div className="font-bold text-xl text-brandBlue tracking-wide flex items-center gap-2">
-                 <span className="text-2xl">▲</span> CARIBE CARGO, S.R.L.
+        <header className="border-b border-gray-100 py-6">
+          <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
+            
+            {/* LOGO Y NOMBRE */}
+            <Link href="/" className="flex items-center gap-3 group">
+              <div className="relative w-8 h-8">
+                {/* Asegúrate de que el nombre del archivo coincida con el que subiste a /public */}
+                <Image 
+                  src="/logo-caribe.png" 
+                  alt="Logo Caribe Cargo"
+                  fill
+                  className="object-contain"
+                  priority
+                />
               </div>
-            </div>
-            <nav className="flex gap-6 text-sm text-gray-600 font-medium">
-              <Link href="/" className="hover:text-brandBlue">Inicio</Link>
-              <Link href="/dashboard" className="hover:text-brandBlue">Dashboard (KPIs/SPI)</Link>
+              <span className="font-bold text-xl text-brandBlue tracking-tight">
+                CARIBE CARGO, S.R.L.
+              </span>
+            </Link>
+
+            {/* NAVEGACIÓN */}
+            <nav className="flex gap-8 text-[15px] font-semibold text-slate-600">
+              <Link href="/" className="hover:text-brandBlue transition-colors">
+                Inicio
+              </Link>
+              <Link href="/dashboard" className="hover:text-brandBlue transition-colors">
+                Dashboard (KPIs/SPI)
+              </Link>
             </nav>
           </div>
         </header>
 
-        {/* CONTENIDO PRINCIPAL */}
         <main className="flex-grow">
           {children}
         </main>
