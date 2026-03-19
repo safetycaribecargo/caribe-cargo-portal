@@ -46,7 +46,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <footer className="bg-[#f9fafb] border-t border-gray-200 pt-10 pb-6 mt-20">
           <div className="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8 mb-8 text-sm">
             <div>
-              <h4 className="font-bold text-gray-900 mb-2">Caribe Cargo</h4>
+              <h4 className="font-bold text-gray-900 mb-2">Caribe Cargo S.R.L.</h4>
               <p className="text-gray-500">Portal Interno de Reportes de Seguridad</p>
             </div>
             <div>
@@ -56,7 +56,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </div>
             <div>
               <h4 className="font-bold text-gray-900 mb-2">Ubicación</h4>
-              <p className="text-gray-500 mb-1">Aeropuerto Internacional Las Américas (AILA)</p>
+              <p className="text-gray-500 mb-1">Aeropuerto Internacional Las Américas (AILA). Depsosito #5</p>
               <p className="text-gray-500">Santo Domingo, RD</p>
             </div>
           </div>
