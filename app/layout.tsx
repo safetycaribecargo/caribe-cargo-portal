@@ -1,0 +1,1 @@
+import React from 'react';\nimport Navbar from './components/Navbar';\nimport Footer from './components/Footer';\n\nconst Layout = ({ children }) => {\n    return (\n        <div>\n            <Navbar />\n            <main>{children}</main>\n            <Footer />\n        </div>\n    );\n};\n\nexport default Layout;\n
