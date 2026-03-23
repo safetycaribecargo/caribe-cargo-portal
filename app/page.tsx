@@ -16,12 +16,9 @@ export default function Home() {
     setResultado(null);
 
     try {
-      // Llamamos a la API que creamos (asegúrate de que el archivo app/api/buscar/route.ts exista)
       const res = await fetch(`/api/buscar?id=${busqueda}`);
       const data = await res.json();
-
       if (!res.ok) throw new Error(data.error || 'No se encontró el reporte');
-      
       setResultado(data);
     } catch (err: any) {
       setError(err.message);
@@ -31,101 +28,85 @@ export default function Home() {
   };
 
   return (
-    <div className="relative min-h-screen">
-      {/* FONDO DIFUMINADO ATRACTIVO */}
+    <div className="relative min-h-screen font-sans">
+      {/* FONDO DIFUMINADO */}
       <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] rounded-full bg-[#1B365D]/10 blur-[100px]" />
-        <div className="absolute bottom-[10%] right-[-5%] w-[400px] h-[400px] rounded-full bg-[#3D6FB6]/10 blur-[80px]" />
+        <div className="absolute top-[-10%] left-[-10%] w-[600px] h-[600px] rounded-full bg-[#1B365D]/5 blur-[120px]" />
+        <div className="absolute bottom-[10%] right-[-5%] w-[500px] h-[500px] rounded-full bg-[#1B365D]/10 blur-[100px]" />
       </div>
 
-      {/* CONTENIDO PRINCIPAL */}
-      <div className="relative z-10 max-w-3xl mx-auto px-4 pt-16 pb-20">
-        
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-extrabold text-[#1B365D] mb-4">
-            Portal de Reportes de Seguridad
-          </h1>
-          <p className="text-slate-600 text-lg">
-            Busca el estado y detalles de tu reporte ingresando el ID asignado.
-          </p>
+      <div className="relative z-10 max-w-4xl mx-auto px-4 pt-16 pb-20">
+        <div className="text-center mb-10">
+          <h1 className="text-4xl font-extrabold text-[#1B365D] mb-4 tracking-tight">Portal de Reportes de Seguridad</h1>
+          <p className="text-slate-500 text-lg">Ingrese el ID para verificar el estatus de su reporte.</p>
         </div>
 
-        {/* BARRA DE BÚSQUEDA */}
-        <div className="flex mb-10 shadow-xl rounded-lg overflow-hidden border border-slate-200 bg-white">
+        {/* BUSCADOR */}
+        <div className="flex mb-10 shadow-2xl rounded-2xl overflow-hidden border border-slate-200 bg-white p-2">
           <input 
             type="text" 
             value={busqueda}
             onChange={(e) => setBusqueda(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && manejarBusqueda()}
-            placeholder="Ej: SDQ-281120251142" 
-            className="flex-grow px-6 py-4 outline-none text-slate-700 text-lg"
+            placeholder="Ej: PUJ-220320261833" 
+            className="flex-grow px-6 py-4 outline-none text-slate-700 text-lg rounded-xl"
           />
           <button 
             onClick={manejarBusqueda}
             disabled={cargando}
-            className="bg-[#1B365D] text-white px-10 py-4 font-bold hover:bg-[#132846] transition-all disabled:opacity-50 flex items-center gap-2"
+            className="bg-[#1B365D] text-white px-10 py-4 font-bold rounded-xl hover:bg-[#132846] transition-all disabled:opacity-50"
           >
             {cargando ? 'Buscando...' : 'Buscar'}
           </button>
         </div>
 
-        {/* MENSAJE DE ERROR */}
         {error && (
-          <div className="p-4 mb-8 bg-red-50 text-red-700 border border-red-200 rounded-xl text-center animate-pulse">
-            ⚠️ {error}
+          <div className="p-4 mb-8 bg-red-50 text-red-600 border border-red-100 rounded-2xl text-center font-medium animate-in fade-in zoom-in duration-300">
+            {error}
           </div>
         )}
 
-        {/* RESULTADOS DE AIRTABLE */}
+        {/* RESULTADO DETALLADO */}
         {resultado && (
-          <div className="p-8 border border-slate-200 bg-white/80 backdrop-blur-md rounded-2xl shadow-2xl mb-12 animate-in fade-in slide-in-from-bottom-5 duration-700">
-            <div className="flex justify-between items-center mb-6 border-b pb-4">
-              <h3 className="text-2xl font-bold text-[#1B365D]">Detalles del Reporte</h3>
-              <span className="px-4 py-1 bg-blue-100 text-[#1B365D] rounded-full text-sm font-bold uppercase">
-                {resultado.Estado || 'Procesando'}
+          <div className="bg-white/90 backdrop-blur-xl border border-slate-200 rounded-3xl shadow-2xl p-8 animate-in fade-in slide-in-from-bottom-8 duration-500">
+            <div className="flex flex-wrap justify-between items-center mb-8 gap-4 border-b border-slate-100 pb-6">
+              <div>
+                <h3 className="text-2xl font-black text-[#1B365D]">Detalles del Reporte</h3>
+                <p className="text-slate-400 font-mono text-sm">{resultado['ID del reporte']}</p>
+              </div>
+              <span className={`px-6 py-2 rounded-full text-sm font-black uppercase tracking-widest ${resultado['Estado Inbox'] === 'Resuelto' ? 'bg-green-100 text-green-700' : 'bg-amber-100 text-amber-700'}`}>
+                {resultado['Estado Inbox'] || 'Pendiente'}
               </span>
             </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div>
-                <label className="text-xs font-black text-slate-400 uppercase tracking-widest">ID Reporte</label>
-                <p className="text-lg font-semibold text-slate-800">{resultado.ID_Reporte}</p>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+              <div className="space-y-6">
+                <div>
+                  <label className="block text-[10px] font-black text-slate-400 uppercase mb-1 tracking-widest">Estación y Área</label>
+                  <p className="text-slate-800 font-bold">{resultado['Estación']} - {resultado['Area de Suceso']}</p>
+                </div>
+                <div>
+                  <label className="block text-[10px] font-black text-slate-400 uppercase mb-1 tracking-widest">Fecha de Ingreso</label>
+                  <p className="text-slate-800 font-bold">{resultado['Fecha de ingreso del reporte']}</p>
+                </div>
+                <div>
+                  <label className="block text-[10px] font-black text-slate-400 uppercase mb-1 tracking-widest">Descripción</label>
+                  <p className="text-slate-600 leading-relaxed italic">"{resultado['Descripción del Suceso']}"</p>
+                </div>
               </div>
+
+              {/* SECCIÓN DE EVIDENCIAS */}
               <div>
-                <label className="text-xs font-black text-slate-400 uppercase tracking-widest">Fecha de Registro</label>
-                <p className="text-lg font-semibold text-slate-800">{resultado.Fecha || 'No registrada'}</p>
-              </div>
-              <div className="col-span-1 md:col-span-2">
-                <label className="text-xs font-black text-slate-400 uppercase tracking-widest">Descripción del Suceso</label>
-                <p className="text-slate-700 leading-relaxed mt-1">
-                  {resultado.Descripcion || 'Sin descripción adicional en el sistema.'}
-                </p>
+                <label className="block text-[10px] font-black text-slate-400 uppercase mb-3 tracking-widest">Evidencias Adjuntas</label>
+                <div className="grid grid-cols-2 gap-3">
+                  {resultado['Evidencias']?.map((img: any, i: number) => (
+                    <div key={i} className="relative aspect-square rounded-xl overflow-hidden border border-slate-100 shadow-sm group">
+                      <img src={img.url} alt="Evidencia" className="object-cover w-full h-full transition-transform group-hover:scale-110" />
+                    </div>
+                  )) || <p className="text-slate-400 text-xs italic">No hay imágenes adjuntas</p>}
+                </div>
               </div>
             </div>
-          </div>
-        )}
-
-        {/* TARJETA INFORMATIVA */}
-        {!resultado && !error && (
-          <div className="w-full border border-slate-200 rounded-2xl p-8 bg-white/50 backdrop-blur-sm shadow-sm">
-            <h2 className="text-xl font-bold text-slate-800 mb-6 flex items-center gap-2">
-              <span className="w-2 h-6 bg-[#1B365D] rounded-full"></span>
-              ¿Cómo funciona?
-            </h2>
-            <ul className="space-y-6">
-              <li className="flex gap-4">
-                <div className="flex-shrink-0 w-8 h-8 bg-[#1B365D] text-white rounded-full flex items-center justify-center font-bold text-sm">1</div>
-                <p className="text-slate-600">Ingresa tu ID de reporte en el formato: <code className="bg-slate-100 px-2 py-1 rounded font-mono text-sm">SDQ-281120251142</code></p>
-              </li>
-              <li className="flex gap-4">
-                <div className="flex-shrink-0 w-8 h-8 bg-[#1B365D] text-white rounded-full flex items-center justify-center font-bold text-sm">2</div>
-                <p className="text-slate-600">Nuestro sistema conectará con la base de datos de <strong>Airtable</strong> para verificar el estatus actual.</p>
-              </li>
-              <li className="flex gap-4">
-                <div className="flex-shrink-0 w-8 h-8 bg-[#1B365D] text-white rounded-full flex items-center justify-center font-bold text-sm">3</div>
-                <p className="text-slate-600">Para detalles confidenciales o investigación completa, usa tu acceso privado.</p>
-              </li>
-            </ul>
           </div>
         )}
       </div>
