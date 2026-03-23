@@ -13,3 +13,16 @@ module.exports = {
   },
   plugins: [],
 };
+/** Nuevo Dark Mode, borrar despues de aqui si da error */
+import type { Config } from "tailwindcss";
+
+const config: Config = {
+  darkMode: 'media', // Esto hace que cambie según el sistema operativo
+  content: [
+    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+  ],
+  // ... resto de la configuración
+};
+export default config;
