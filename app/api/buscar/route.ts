@@ -10,7 +10,7 @@ export async function GET(request: Request) {
   const baseId = process.env.AIRTABLE_BASE_ID;
   const table = process.env.AIRTABLE_TABLE_NAME;
 
-  const url = `https://api.airtable.com/v0/${baseId}/${table}?filterByFormula=({ID_Reporte}='${id}')`;
+  const url = `https://api.airtable.com/v0/${baseId}/${table}?filterByFormula=({ID del reporte}='${id}')`;
 
   try {
     const res = await fetch(url, {
