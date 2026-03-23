@@ -12,7 +12,7 @@ export async function GET(request: Request) {
   const baseId = process.env.AIRTABLE_BASE_ID;
   const table = process.env.AIRTABLE_TABLE_NAME;
 
-  // Filtro ajustado al nombre exacto de tu columna en Airtable
+  // Filtro con el nombre exacto de tu columna
   const url = `https://api.airtable.com/v0/${baseId}/${table}?filterByFormula=({ID del reporte}='${id}')`;
 
   try {
@@ -24,12 +24,11 @@ export async function GET(request: Request) {
     const data = await res.json();
 
     if (!data.records || data.records.length === 0) {
-      return NextResponse.json({ error: 'No se encontró ningún reporte con ese ID' }, { status: 404 });
+      return NextResponse.json({ error: 'No se encontró el reporte' }, { status: 404 });
     }
 
-    // Enviamos los datos del registro encontrado
     return NextResponse.json(data.records[0].fields);
   } catch (error) {
-    return NextResponse.json({ error: 'Error de conexión con la base de datos' }, { status: 500 });
+    return NextResponse.json({ error: 'Error de conexión' }, { status: 500 });
   }
 }
