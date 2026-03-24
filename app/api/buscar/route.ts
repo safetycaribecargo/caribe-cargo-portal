@@ -1,7 +1,5 @@
 import { NextResponse } from 'next/server';
 
-export const dynamic = 'force-dynamic';
-
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const id = searchParams.get('id');
@@ -12,23 +10,22 @@ export async function GET(request: Request) {
   const baseId = process.env.AIRTABLE_BASE_ID;
   const table = process.env.AIRTABLE_TABLE_NAME;
 
-  // Filtro usando el nombre exacto: "ID del reporte"
-  const url = `https://api.airtable.com/v0/${baseId}/${table}?filterByFormula=({ID del reporte}='${id}')`;
+  const url = `https://api.airtable.com/v0/${baseId}/${table}?filterByFormula={ID del reporte}='${id}'`;
 
   try {
     const res = await fetch(url, {
       headers: { Authorization: `Bearer ${token}` },
-      cache: 'no-store'
+      next: { revalidate: 0 }
     });
 
     const data = await res.json();
 
     if (!data.records || data.records.length === 0) {
-      return NextResponse.json({ error: 'Reporte no encontrado en Airtable' }, { status: 404 });
+      return NextResponse.json({ error: 'Reporte no encontrado' }, { status: 404 });
     }
 
     return NextResponse.json(data.records[0].fields);
   } catch (error) {
-    return NextResponse.json({ error: 'Error de conexión con el servidor' }, { status: 500 });
+    return NextResponse.json({ error: 'Error de conexión con Airtable' }, { status: 500 });
   }
 }
