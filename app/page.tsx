@@ -28,19 +28,15 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 transition-colors duration-300">
-      {/* Fondo Difuminado Adaptativo */}
-      <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] rounded-full bg-[#1B365D]/10 dark:bg-blue-500/5 blur-[100px]" />
-      </div>
-
       <div className="relative z-10 max-w-4xl mx-auto px-6 pt-16 pb-20">
+        
         <div className="text-center mb-12">
           <h1 className="text-4xl font-black text-[#1B365D] dark:text-blue-400 mb-4">Portal de Reportes de Seguridad</h1>
           <p className="text-slate-500 dark:text-slate-400 text-lg">Consulta de estatus Caribe Cargo S.R.L.</p>
         </div>
 
-        {/* Buscador Adaptativo */}
-        <div className="flex mb-10 shadow-xl rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-2">
+        {/* BUSCADOR */}
+        <div className="flex mb-6 shadow-xl rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-2">
           <input 
             type="text" 
             value={busqueda}
@@ -52,18 +48,12 @@ export default function Home() {
           <button 
             onClick={manejarBusqueda}
             disabled={cargando}
-            className="bg-[#1B365D] dark:bg-blue-600 text-white px-10 py-4 font-bold rounded-xl hover:opacity-90 transition-all"
+            className="bg-[#1B365D] dark:bg-blue-600 text-white px-10 py-4 font-bold rounded-xl hover:opacity-90 transition-all disabled:opacity-50"
           >
             {cargando ? '...' : 'Buscar'}
           </button>
         </div>
 
-        {error && (
-          <div className="p-4 mb-8 bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 border border-red-100 dark:border-red-900/30 rounded-2xl text-center">
-            {error}
-          </div>
-        )}
-        
         {/* BANNER DE MANTENIMIENTO */}
         <div className="mb-10 flex items-start gap-4 p-4 bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-900/30 rounded-2xl shadow-sm animate-pulse">
           <div className="flex-shrink-0 bg-amber-100 dark:bg-amber-900/50 p-2 rounded-lg">
@@ -72,16 +62,30 @@ export default function Home() {
             </svg>
           </div>
           <div>
-            <h4 className="text-sm font-bold text-amber-800 dark:text-amber-300 uppercase tracking-wide">
-              Portal en Optimización
-            </h4>
-            <p className="text-sm text-amber-700 dark:text-amber-400/80 mt-1 leading-relaxed">
-              Estamos realizando mejoras técnicas en nuestra base de datos. Es posible que algunos detalles del reporte o evidencias adjuntas no se muestren temporalmente.
-            </p>
+            <h4 className="text-sm font-bold text-amber-800 dark:text-amber-300 uppercase tracking-wide">Portal en Optimización</h4>
+            <p className="text-sm text-amber-700 dark:text-amber-400/80 mt-1">Estamos realizando mejoras técnicas. Es posible que algunos detalles no se muestren temporalmente.</p>
           </div>
         </div>
-        
-        {/* Card de Resultado Completa */}
+
+        {/* INSTRUCCIONES (Solo se ven si no hay resultado) */}
+        {!resultado && !error && (
+          <div className="bg-white/50 dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800 rounded-3xl p-8 shadow-sm">
+            <h3 className="text-xl font-bold text-slate-800 dark:text-slate-200 mb-4 text-center">¿Cómo funciona?</h3>
+            <div className="space-y-4 max-w-md mx-auto text-slate-600 dark:text-slate-400">
+              <p><strong>1.</strong> Ingresa tu ID de reporte en el formato: <code className="bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded text-xs">PUJ-220320261833</code></p>
+              <p><strong>2.</strong> Visualiza los detalles básicos y evidencias adjuntas.</p>
+              <p><strong>3.</strong> Para investigación completa, utiliza el acceso privado.</p>
+            </div>
+          </div>
+        )}
+
+        {error && (
+          <div className="p-4 mb-8 bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 border border-red-100 dark:border-red-900/30 rounded-2xl text-center">
+            {error}
+          </div>
+        )}
+
+        {/* CARD DE RESULTADOS */}
         {resultado && (
           <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border border-slate-200 dark:border-slate-800 rounded-3xl shadow-2xl p-8 animate-in fade-in slide-in-from-bottom-4">
             <div className="flex justify-between items-center mb-8 border-b dark:border-slate-800 pb-6">
@@ -102,7 +106,7 @@ export default function Home() {
                 </div>
                 <div>
                   <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Descripción</label>
-                  <p className="text-slate-600 dark:text-slate-400 leading-relaxed italic">
+                  <p className="text-slate-600 dark:text-slate-400 italic">
                     {resultado['Descripción del Suceso'] || 'Sin descripción detallada.'}
                   </p>
                 </div>
@@ -113,7 +117,7 @@ export default function Home() {
                 <div className="grid grid-cols-2 gap-3">
                   {resultado['Evidencias']?.map((img: any, i: number) => (
                     <img key={i} src={img.url} alt="Evidencia" className="rounded-xl object-cover h-24 w-full border dark:border-slate-800" />
-                  )) || <p className="text-slate-400 text-xs italic">No hay evidencias cargadas.</p>}
+                  )) || <p className="text-slate-400 text-xs italic text-center col-span-2">No hay evidencias.</p>}
                 </div>
               </div>
             </div>
