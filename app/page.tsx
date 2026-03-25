@@ -98,7 +98,7 @@ export default function Home() {
                 <div>
                   <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1.5">Descripción</label>
                   <p className="text-slate-700 dark:text-slate-300 leading-relaxed italic mt-1 font-medium">
-                    {resultado['Descripción del Suceso'] || 'Sin descripción detallada.'}
+                    {resultado['Descripcion del Suceso'] || 'Sin descripción detallada.'}
                   </p>
                 </div>
               </div>
