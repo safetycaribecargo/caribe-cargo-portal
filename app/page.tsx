@@ -124,12 +124,13 @@ export default function Home() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
               <div className="space-y-6">
                 
-                {/* 1. SECCIÓN DE FECHA ACTUALIZADA SEGÚN TU CAPTURA DE AIRTABLE */}
+                {/* SECCIÓN DE FECHA FORMATEADA */}
                 <div>
-                  <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1.5">Fecha de Ingreso del Reporte</label>
+                  <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1.5">
+                    Fecha de Ingreso del Reporte
+                  </label>
                   <p className="text-slate-800 dark:text-slate-200 font-bold">
-                    {/* Usamos corchetes para los nombres con espacios y tildes */}
-                    {resultado['Fecha de ingreso del reporte (Sistema)'] || 'Fecha no disponible'}
+                    {formatearFecha(resultado['Fecha de ingreso del reporte (Sistema)'])}
                   </p>
                 </div>
 
