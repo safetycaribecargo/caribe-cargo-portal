@@ -182,7 +182,7 @@ export default function Home() {
             {mostrarMas && (
               <div className="mt-8 p-6 bg-slate-100/50 dark:bg-slate-950/50 rounded-2xl border dark:border-slate-800 animate-in fade-in duration-300">
                 <p className="text-slate-500 dark:text-slate-400 text-sm text-center italic">
-                  Detalles no dispibles temporalmente.
+                  Detalles no dispibles temporalmente, Comuníquese con safety@caribecargo.net para más información.
                 </p>
               </div>
             )}
