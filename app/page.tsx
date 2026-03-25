@@ -64,7 +64,7 @@ export default function Home() {
         
         <div className="text-center mb-12">
           <h1 className="text-4xl font-black text-[#1B365D] dark:text-blue-400 mb-4 tracking-tighter">Portal de Reportes de Seguridad</h1>
-          <p className="text-slate-500 dark:text-slate-400 text-lg">Consulta de estatus Caribe Cargo S.R.L.</p>
+          <p className="text-slate-500 dark:text-slate-400 text-lg">Consulta de estatus</p>
         </div>
 
         {/* BUSCADOR */}
@@ -182,7 +182,7 @@ export default function Home() {
             {mostrarMas && (
               <div className="mt-8 p-6 bg-slate-100/50 dark:bg-slate-950/50 rounded-2xl border dark:border-slate-800 animate-in fade-in duration-300">
                 <p className="text-slate-500 dark:text-slate-400 text-sm text-center italic">
-                  Detalles o evidencias no se muestren temporalmente.
+                  Detalles no dispibles temporalmente.
                 </p>
               </div>
             )}
