@@ -12,6 +12,32 @@ export default function Home() {
   // ESTADO PARA CONTROLAR LA EXPANSIÓN DE DETALLES (Se usará más adelante)
   const [mostrarMas, setMostrarMas] = useState(false);
 
+  // Función para dar formato amigable a la fecha
+  const formatearFecha = (fechaRaw: string) => {
+    if (!fechaRaw) return 'Fecha no disponible';
+    
+    const fecha = new Date(fechaRaw);
+    
+    // Formato: 22 de marzo de 2026
+    const opcionesFecha: Intl.DateTimeFormatOptions = {
+      day: '2-digit',
+      month: 'long',
+      year: 'numeric',
+    };
+    
+    // Formato: 18:45 (24 horas)
+    const opcionesHora: Intl.DateTimeFormatOptions = {
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false,
+    };
+  
+    const fechaLegible = fecha.toLocaleDateString('es-ES', opcionesFecha);
+    const horaLegible = fecha.toLocaleTimeString('es-ES', opcionesHora);
+  
+    return `${fechaLegible}, ${horaLegible}`;
+  };
+  
   const manejarBusqueda = async () => {
     if (!busqueda) return;
     setCargando(true);
