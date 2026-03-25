@@ -164,7 +164,7 @@ export default function Home() {
                 onClick={() => setMostrarMas(!mostrarMas)}
                 className="flex items-center gap-3 px-8 py-3 bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800 text-[#1B365D] dark:text-blue-300 font-black rounded-2xl shadow-sm hover:shadow-lg transition-all hover:border-brandBlue/30 hover:scale-105 active:scale-95 group"
               >
-                {mostrarMas ? 'Ocultar detalles confidenciales' : 'Ver más detalles de la investigación'}
+                {mostrarMas ? 'Ver menos detalles' : 'Ver más detalles'}
                 
                 {/* Icono de Flecha animada (se voltea si mostrarMas es true) */}
                 <svg 
@@ -182,7 +182,7 @@ export default function Home() {
             {mostrarMas && (
               <div className="mt-8 p-6 bg-slate-100/50 dark:bg-slate-950/50 rounded-2xl border dark:border-slate-800 animate-in fade-in duration-300">
                 <p className="text-slate-500 dark:text-slate-400 text-sm text-center italic">
-                  Aquí se mostrará la información confidencial de la segunda tabla (lógica aún no implementada).
+                  Detalles o evidencias no se muestren temporalmente.
                 </p>
               </div>
             )}
