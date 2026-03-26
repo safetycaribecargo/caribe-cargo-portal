@@ -117,7 +117,7 @@ export default function Home() {
                 <p className="text-slate-400 font-mono text-sm tracking-tight">{resultado['ID del reporte']}</p>
               </div>
               <span className={`px-6 py-2 rounded-full text-xs font-black uppercase tracking-widest ${resultado['Estado Inbox'] === 'Resuelto' ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300' : 'bg-blue-100 dark:bg-blue-900/40 text-[#1B365D] dark:text-blue-300'}`}>
-                {resultado['Estado Inbox'] || 'Clasificado'}
+                {resultado['Estado del reporte'] || 'Clasificado'}
               </span>
             </div>
 
