@@ -4,6 +4,9 @@ import { useState } from 'react';
 import Image from 'next/image';
 
 export default function Home() {
+  const [mostrarLogin, setMostrarLogin] = useState(false);
+  const [usuario, setUsuario] = useState('');
+  const [password, setPassword] = useState('');
   const [busqueda, setBusqueda] = useState('');
   const [resultado, setResultado] = useState<any>(null);
   const [error, setError] = useState('');
